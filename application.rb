@@ -51,6 +51,10 @@ class Message
     @alert || @deployment
   end
 
+  def critical?
+    data['severity'] == 'critical'
+  end
+
   def deployment?
     !!@deployment
   end
@@ -78,7 +82,7 @@ class Message
   def priority
     if alert? && downtime?
       EMERGENCY
-    elsif alert?
+    elsif alert? && critical?
       HIGH
     else
       NORMAL
