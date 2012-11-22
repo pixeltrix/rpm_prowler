@@ -95,6 +95,12 @@ class Message
 
 end
 
+configure do
+  Prowler.configure do |config|
+    config.root_certificates = ENV['SSL_CERT_FILE'] if ENV['SSL_CERT_FILE']
+  end
+end
+
 post '/' do
   Message.send(params)
 end
